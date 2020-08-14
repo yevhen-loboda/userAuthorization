@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 
@@ -10,7 +11,8 @@ import { auth } from 'firebase/app';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -18,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    this.auth.signOut();
+    this.auth.signOut().then(() => this.router.navigate(['login']));
   }
 
 }
